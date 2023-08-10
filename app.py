@@ -17,6 +17,9 @@ from shiny import App, ui   # pip install shiny
 import shinyswatch          # pip install shinyswatch
 
 # Finally, import what we need from other local code files.
+from mlb_stats_inputs import get_team_data_inputs
+from mlb_stats_outputs import get_team_data_outputs
+from mlb_stats_server import get_team_data_server_functions
 from continuous_location import update_csv_location
 from continuous_stock import update_csv_stock
 from mtcars_server import get_mtcars_server_functions

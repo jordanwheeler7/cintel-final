@@ -1,9 +1,9 @@
 # Continuous Intelligence App
 
-- Repository: [cintel-05-live-updates](https://github.com/jordanwheeler7/cintel-live-updates-final)
-- Website: [cintel-05-live-updates](https://jordanwheeler7.github.io/cintel-live-updates-final)
+- Repository: [cintel-final](https://github.com/jordanwheeler7/cintel-final)
+- Website: [cintel-final](https://jordanwheeler7.github.io/cintel-final)
 - Author: [Jordan Wheeler](https://github.com/jordanwheeler7)
-- Shiny: [Wheeler Dashboard](https://jordan-wheeler7.shinyapps.io/cintel-live-updates-final/)
+- Shiny: [Wheeler Dashboard](https://jordan-wheeler7.shinyapps.io/cintel-final/)
 
 -----
 
