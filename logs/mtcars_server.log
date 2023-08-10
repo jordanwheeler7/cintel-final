@@ -1,0 +1,67 @@
+2023-08-08 13:43:58,261.mtcars_server.INFO =============================================================
+2023-08-08 13:43:58,261.mtcars_server.INFO Today is 2023-08-08 at 01:43 PM
+2023-08-08 13:43:58,261.mtcars_server.INFO This file is running on: nt Windows 10
+2023-08-08 13:43:58,261.mtcars_server.INFO The Python version is: 3.11.1
+2023-08-08 13:43:58,261.mtcars_server.INFO The active environment path is:   C:\Users\jorda\OneDrive\Desktop\Northwest Homework\1. Continuous Intellgience\Module 7\cintel-live-updates-final\.venv
+2023-08-08 13:43:58,261.mtcars_server.INFO The current working directory is: C:\Users\jorda\OneDrive\Desktop\Northwest Homework\1. Continuous Intellgience\Module 7\cintel-live-updates-final
+2023-08-08 13:43:58,262.mtcars_server.INFO =============================================================
+2023-08-08 13:44:00,347.mtcars_server.DEBUG filter message: Showing 32 of 32 records
+2023-08-08 13:44:00,466.mtcars_server.INFO Starting mtcars_output_widget1
+2023-08-08 13:44:01,159.mtcars_server.INFO Starting mtcars_plot1
+2023-08-08 13:44:03,942.mtcars_server.INFO READING df from C:\Users\jorda\OneDrive\Desktop\Northwest Homework\1. Continuous Intellgience\Module 7\cintel-live-updates-final\data\mtcars_location.csv
+2023-08-08 13:44:03,944.mtcars_server.INFO READING df len 12
+2023-08-08 13:44:03,944.mtcars_server.INFO init reactive_temp_df len: 12
+2023-08-08 13:44:03,944.mtcars_server.INFO mtcars_temperature_location_string starting
+2023-08-08 13:44:03,944.mtcars_server.INFO Recent Temperature in F for ELY MN.
+Updated once per minute for 15 minutes.
+Keeps the most recent 10 minutes of data.
+2023-08-08 13:44:03,946.mtcars_server.INFO Rendering TEMP table with 3 rows
+2023-08-08 13:44:03,948.mtcars_server.INFO Rendering TEMP chart with 3 points
+2023-08-08 13:44:04,003.mtcars_server.INFO READING df from C:\Users\jorda\OneDrive\Desktop\Northwest Homework\1. Continuous Intellgience\Module 7\cintel-live-updates-final\data\mtcars_stock.csv
+2023-08-08 13:44:04,005.mtcars_server.INFO READING df len 30
+2023-08-08 13:44:04,005.mtcars_server.INFO init reactive_price_df len: 30
+2023-08-08 13:44:04,005.mtcars_server.INFO mtcars_price_stocks_string starting
+2023-08-08 13:44:04,005.mtcars_server.INFO Recent Price in USD for Cadence Design Systems.
+Updated once per minute for 15 minutes.
+Keeps the most recent 10 minutes of data.
+2023-08-08 13:44:04,006.mtcars_server.INFO mtcars_price_stocks_daily_high starting
+2023-08-08 13:44:04,006.mtcars_server.INFO READING df len 30
+2023-08-08 13:44:04,006.mtcars_server.INFO Rendering Price table with 3 rows
+2023-08-08 13:44:04,007.mtcars_server.INFO READING df_stocks_high 229.0
+2023-08-08 13:44:04,007.mtcars_server.INFO The daily high for Cadence Design Systems is 229.0.
+2023-08-08 13:44:04,007.mtcars_server.INFO Rendering Price table with 3 rows
+2023-08-08 13:44:04,009.mtcars_server.INFO Rendering Price chart with 3 points
+2023-08-08 13:44:13,914.mtcars_server.INFO READING df from C:\Users\jorda\OneDrive\Desktop\Northwest Homework\1. Continuous Intellgience\Module 7\cintel-live-updates-final\data\mtcars_location.csv
+2023-08-08 13:44:13,920.mtcars_server.INFO READING df len 4
+2023-08-08 13:44:13,920.mtcars_server.INFO Rendering TEMP table with 1 rows
+2023-08-08 13:44:13,923.mtcars_server.INFO Rendering TEMP chart with 1 points
+2023-08-08 13:44:13,965.mtcars_server.INFO mtcars_price_stocks_daily_high starting
+2023-08-08 13:44:13,965.mtcars_server.INFO READING df from C:\Users\jorda\OneDrive\Desktop\Northwest Homework\1. Continuous Intellgience\Module 7\cintel-live-updates-final\data\mtcars_stock.csv
+2023-08-08 13:44:13,970.mtcars_server.INFO READING df len 10
+2023-08-08 13:44:13,970.mtcars_server.INFO READING df len 10
+2023-08-08 13:44:13,971.mtcars_server.INFO Rendering Price table with 1 rows
+2023-08-08 13:44:13,971.mtcars_server.INFO READING df_stocks_high 228.95
+2023-08-08 13:44:13,971.mtcars_server.INFO The daily high for Cadence Design Systems is 228.95.
+2023-08-08 13:44:13,973.mtcars_server.INFO Rendering Price table with 1 rows
+2023-08-08 13:44:13,975.mtcars_server.INFO Rendering Price chart with 1 points
+2023-08-08 13:44:25,109.mtcars_server.INFO init reactive_temp_df len: 4
+2023-08-08 13:44:25,109.mtcars_server.INFO mtcars_temperature_location_string starting
+2023-08-08 13:44:25,109.mtcars_server.INFO Recent Temperature in F for Milan MO.
+Updated once per minute for 15 minutes.
+Keeps the most recent 10 minutes of data.
+2023-08-08 13:44:25,110.mtcars_server.INFO Rendering TEMP table with 1 rows
+2023-08-08 13:44:25,112.mtcars_server.INFO Rendering TEMP chart with 1 points
+2023-08-08 13:44:29,331.mtcars_server.INFO init reactive_temp_df len: 4
+2023-08-08 13:44:29,331.mtcars_server.INFO mtcars_temperature_location_string starting
+2023-08-08 13:44:29,331.mtcars_server.INFO Recent Temperature in F for Death Valley CA.
+Updated once per minute for 15 minutes.
+Keeps the most recent 10 minutes of data.
+2023-08-08 13:44:29,333.mtcars_server.INFO Rendering TEMP table with 1 rows
+2023-08-08 13:44:29,335.mtcars_server.INFO Rendering TEMP chart with 1 points
+2023-08-08 13:44:32,444.mtcars_server.INFO init reactive_temp_df len: 4
+2023-08-08 13:44:32,445.mtcars_server.INFO mtcars_temperature_location_string starting
+2023-08-08 13:44:32,445.mtcars_server.INFO Recent Temperature in F for Milan MO.
+Updated once per minute for 15 minutes.
+Keeps the most recent 10 minutes of data.
+2023-08-08 13:44:32,446.mtcars_server.INFO Rendering TEMP table with 1 rows
+2023-08-08 13:44:32,448.mtcars_server.INFO Rendering TEMP chart with 1 points
