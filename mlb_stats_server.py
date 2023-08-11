@@ -1,65 +1,122 @@
-"""
-============================
-Extract MLB Team Data from Web
-============================
-This script extracts MLB team data from the Baseball Reference website and saves it to a CSV file.
-
-This script requires that `requests`, `BeautifulSoup`, and `pandas` be installed within the Python
-environment you are running this script in.    
-    
-"""
-
-import requests
-from bs4 import BeautifulSoup
 import pandas as pd
-from pathlib import Path
+from shiny import render, reactive
+from shinywidgets import render_widget
+import plotly.express as px
+import pathlib
 from util_logger import setup_logger
 
-# Set up a file logger
-logger, log_filename = setup_logger(__file__)
+logger, logname = setup_logger(__name__)
 
-# URL of the webpage to scrape
-url = "https://www.baseball-reference.com/teams/"
+def get_team_data_server_functions(input, output, session):
+    """Define functions to create UI outputs."""
 
-# Send an HTTP GET request to the URL
-response = requests.get(url)
-logger.info(f"response: {response}")
+    p = pathlib.Path(__file__).parent.joinpath("data").joinpath("team_data.csv")
+    original_df = pd.read_csv(p)
+    print(original_df.head())
+    total_count = len(original_df)
 
-# Parse the HTML content using BeautifulSoup
-soup = BeautifulSoup(response.content, "html.parser")
-logger.info(f"soup: {soup}")
+    # Create a reactive value to hold the selected team and the filtered pandas dataframe
+    reactive_team = reactive.Value("All Teams")
+    reactive_df = reactive.Value()
 
-# Find the table containing the data
-table = soup.find('table', class_='sortable')
-logger.info(f"table: {table}")
+    # Create a reactive effect to set the reactive value when inputs change
 
-# Create a list to store the data
-data = []
-logger.info(f"data: {data}")
+    @reactive.Effect
+    @reactive.event(
+        input.TEAM_WINS_RANGE,
+        input.TEAM_LOSSES_RANGE,
+        input.TEAM_DIVISIONS,
+        input.TEAM_SELECT,
+    )
+    def update_filtered_df():
+        selected_team = input.TEAM_SELECT()
+        df = original_df.copy()
 
-# Iterate through the table rows and extract data
-for row in table.find_all('tr'):
-    logger.info(f"row: {row}")
-    cells = row.find_all(['th', 'td'])
-    logger.info(f"cells: {cells}")
-    row_data = [cell.get_text(strip=True) for cell in cells]
-    if row_data:
-        data.append(row_data)
-        logger.info(f"row_data: {row_data}")
+        # Filter by selected team
+        if selected_team != "All Teams":
+            df = df[df["Franchise"] == selected_team]
 
-# Define the column headers
-headers = data[0]
+        # Wins and Losses are ranges
+        input_wins_range = input.TEAM_WINS_RANGE()
+        input_losses_range = input.TEAM_LOSSES_RANGE()
+        wins_filter = (df["W"] >= input_wins_range[0]) & (df["W"] <= input_wins_range[1])
+        losses_filter = (df["L"] >= input_losses_range[0]) & (df["L"] <= input_losses_range[1])
+        df = df[wins_filter & losses_filter]
 
-# Create a DataFrame from the data
-df = pd.DataFrame(data[1:], columns=headers)
-logger.info(f"df: {df}")
+        # Division is a list of checkboxes
+        show_divisions_list = []
+        if input.TEAM_DIVISIONS_AL():
+            show_divisions_list.append("AL")
+        if input.TEAM_DIVISIONS_NL():
+            show_divisions_list.append("NL")
+        show_divisions_list = show_divisions_list or ["AL", "NL"]
+        division_filter = df["Divs"].isin(show_divisions_list)
+        df = df[division_filter]
 
-# Define the file path to save the CSV file
-fp = Path(__file__).parent.joinpath("data").joinpath("team_data.csv")
-logger.info(f"fp: {fp}")
+        reactive_df.set(df)
 
-# Save the DataFrame to a CSV file
-df.to_csv(fp, index=False)
-logger.info(f"Data has been extracted and saved to {fp}")
+    @output
+    @render.text
+    def total_team_count():
+        filtered_count = len(reactive_df.get())
+        message = f"Showing {filtered_count} of {total_count} teams"
+        return message
 
-print(f"Data has been extracted and saved to {fp}")
+    @output
+    @render.table
+    def team_data_table():
+        filtered_df = reactive_df.get()
+        return filtered_df
+
+    @output
+    @render_widget
+    def team_win_loss_scatter():
+        df = reactive_df.get()
+        scatter_plot = px.scatter(
+            df,
+            x="W",
+            y="L",
+            color="Franchise",
+            title="Team Win-Loss Scatter Plot",
+            labels={"W": "Wins", "L": "Losses"},
+            size_max=10,
+        )
+        return scatter_plot
+
+    @output
+    @render.text
+    def avg_wins_losses():
+        df = reactive_df.get()
+        avg_wins = df["W"].mean()
+        avg_losses = df["L"].mean()
+        message = f"Average Wins: {avg_wins:.2f}, Average Losses: {avg_losses:.2f}"
+        return message
+
+    @output
+    @render_widget
+    def wins_percentage_by_team():
+        df = reactive_df.get()
+        win_percentage_histogram = px.histogram(
+            df,
+            x="W-L%",
+            title="Win Percentage by Team Histogram",
+            labels={"W-L%": "Win-Loss Percentage"},
+            nbins=20,
+        )
+        return win_percentage_histogram
+
+    @output
+    @render.table
+    def team_data_chart():
+        filtered_df = reactive_df.get()
+        return filtered_df
+
+    # Return a list of function names for use in reactive outputs
+    return [
+        total_team_count,
+        team_data_table,
+        team_win_loss_scatter,
+        avg_wins_losses,
+        wins_percentage_by_team,
+        team_data_chart,
+    ]

@@ -17,14 +17,17 @@ from shiny import App, ui   # pip install shiny
 import shinyswatch          # pip install shinyswatch
 
 # Finally, import what we need from other local code files.
-from mlb_stats_inputs import get_team_data_inputs
-from mlb_stats_outputs import get_team_data_outputs
-from mlb_stats_server import get_team_data_server_functions
 from continuous_location import update_csv_location
 from continuous_stock import update_csv_stock
+
 from mtcars_server import get_mtcars_server_functions
 from mtcars_ui_inputs import get_mtcars_inputs
 from mtcars_ui_outputs import get_mtcars_outputs
+
+from mlb_stats_inputs import get_team_data_inputs
+from mlb_stats_outputs import get_team_data_outputs
+from mlb_stats_server import get_team_data_server_functions
+
 from util_logger import setup_logger
 
 # Set up a logger for this file (see the logs folder to help with debugging).
@@ -43,14 +46,23 @@ async def update_csv_files():
         await asyncio.sleep(60)  # wait for 60 seconds
 
 app_ui = ui.page_navbar(
-    shinyswatch.theme.darkly(),
-    ui.nav(
+    shinyswatch.theme.superhero(),
+        ui.nav(
         "MT_Cars",
         ui.layout_sidebar(
             get_mtcars_inputs(),
             get_mtcars_outputs(),
         ),
-    ),
+        ),
+        ui.nav(
+        "MLB_Stats",
+        ui.layout_sidebar(
+            get_team_data_inputs(),
+            get_team_data_outputs(),
+        ),
+        ),
+       
+    
     ui.nav(ui.a("About", href="https://github.com/jordanwheeler7")),
     ui.nav(ui.a("GitHub", href="https://github.com/jordanwheeler7/cintel-05-live-updates")),
     ui.nav(ui.a("App", href="https://jordan-wheeler7.shinyapps.io/cintel-05-live-updates/")),
@@ -59,6 +71,7 @@ app_ui = ui.page_navbar(
     ui.nav(ui.a("OneCallAPI", href="https://openweathermap.org/api/one-call-3")),
     ui.nav(ui.a("Stock API", href="https://query1.finance.yahoo.com/v7/finance/options/CDNS")),
     ui.nav(ui.a("File_Reader", href="https://shiny.rstudio.com/py/api/reactive.file_reader.html")),
+    ui.nav(ui.a("MLB Data Site", href="https://www.baseball-reference.com/teams/")),
     title=ui.h1("Wheeler Dashboard"),
 )
 
@@ -70,12 +83,13 @@ app_ui = ui.page_navbar(
 def server(input, output, session):
     """Define functions to create UI outputs."""
     logger.info("Starting server ...")
-
     # Kick off continuous updates when the app starts
     asyncio.create_task(update_csv_files())
-    logger.info("Starting continuous updates ...")
-
     get_mtcars_server_functions(input, output, session)
+    get_team_data_server_functions(input, output, session)
+    
+
+    
 
 
 app = App(app_ui, server, debug=True)

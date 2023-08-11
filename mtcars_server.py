@@ -173,7 +173,7 @@ def get_mtcars_server_functions(input, output, session):
         """Return a string based on selected location."""
         logger.info("mtcars_temperature_location_string starting")
         selected = reactive_location.get()
-        line1 = f"Recent Temperature in F for {selected}."
+        line1 = f"Recent weather in F for {selected}. "
         line2 = "Updated once per minute for 15 minutes."
         line3 = "Keeps the most recent 10 minutes of data."
         message = f"{line1}\n{line2}\n{line3}"

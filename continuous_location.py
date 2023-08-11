@@ -69,6 +69,7 @@ def lookup_lat_long(location):
         "Death Valley CA": {"latitude": 36.5323, "longitude": -116.93},
         "Maryville MO": {"latitude": 40.346102, "longitude": -94.872471},
         "Milan MO": {"latitude": 40.2, "longitude": -93.15},
+        "Columbia SC": {"latitude": 34.0, "longitude": -81.0},
     }
     answer_dict = locations_dictionary[location]
     lat = answer_dict["latitude"]
@@ -76,22 +77,23 @@ def lookup_lat_long(location):
     return lat, long
 
 
-async def get_temperature_from_openweathermap(lat, long):
-    logger.info("Calling get_temperature_from_openweathermap for {lat}, {long}}")
+
+async def get_hourly_forecast_from_openweathermap(lat, long):
+    logger.info("Calling get_hourly_forecast_from_openweathermap for {lat}, {long}}")
     api_key = get_API_key()
-    open_weather_url = f"https://api.openweathermap.org/data/2.5/weather?lat={lat}&lon={long}&appid={api_key}&units=imperial"
-    logger.info(f"Calling fetch_from_url for {open_weather_url}")
-    result = await fetch_from_url(open_weather_url, "json")
+    weather_url = f"https://pro.openweathermap.org/data/2.5/forecast/hourly?lat={lat}&lon={long}&appid={api_key}&units=imperial"
+    logger.info(f"Calling fetch_from_url for {weather_url}")
+    result = await fetch_from_url(weather_url, "json")
     logger.info(f"Data from openweathermap: {result}")
-    temp_F = result.data["main"]["temp"]
-    # temp_F = randint(68, 77)  # For testing
-    return temp_F
+    temp_f = result.data["main"]["temp"]["feels_like"]["temp_min"]["temp_max"]['wind']
+    
+    return temp_f
 
 
 # Function to create or overwrite the CSV file with column headings
 def init_csv_file(file_path):
     df_empty = pd.DataFrame(
-        columns=["Location", "Latitude", "Longitude", "Time", "Temp_F"]
+        columns=["Location", "Latitude", "Longitude", "Time", "Temp_F", "Feels_Like", "Temp_Min", "Temp_Max", "Wind"]
     )
     df_empty.to_csv(file_path, index=False)
 
@@ -100,7 +102,7 @@ async def update_csv_location():
     """Update the CSV file with the latest location information."""
     logger.info("Calling update_csv_location")
     try:
-        locations = ["ELY MN", "Death Valley CA", "Maryville MO", "Milan MO"]
+        locations = ["ELY MN", "Death Valley CA", "Maryville MO", "Milan MO", "Columbia SC"]
         update_interval = 60  # Update every 1 minute (60 seconds)
         total_runtime = 15 * 60  # Total runtime maximum of 15 minutes
         num_updates = 40 # Keep the most recent 10 readings
@@ -123,6 +125,10 @@ async def update_csv_location():
             for location in locations:
                 lat, long = lookup_lat_long(location)
                 new_temp = await get_temperature_from_openweathermap(lat, long)
+                feels_like = await get_temperature_from_openweathermap(lat, long)
+                temp_min = await get_temperature_from_openweathermap(lat, long)
+                temp_max = await get_temperature_from_openweathermap(lat, long)
+                wind = await get_temperature_from_openweathermap(lat, long)
                 time_now = datetime.now().strftime("%Y-%m-%d %H:%M:%S")  # Current time
                 new_record = {
                     "Location": location,
@@ -130,6 +136,10 @@ async def update_csv_location():
                     "Longitude": long,
                     "Time": time_now,
                     "Temp_F": new_temp,
+                    "Feels_Like": feels_like,
+                    "Temp_Min": temp_min,
+                    "Temp_Max": temp_max,
+                    "Wind": wind,
                 }
                 records_deque.append(new_record)
 

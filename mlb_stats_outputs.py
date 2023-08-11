@@ -1,5 +1,5 @@
 """
-Purpose: Display output for MT Cars dataset.
+Purpose: Display output for Mlb Stats dataset.
 
 @imports shiny.ui as ui
 @imports shinywidgets.output_widget for interactive charts
@@ -8,39 +8,27 @@ from shiny import ui
 from shinywidgets import output_widget
 
 
-def get_mtcars_outputs():
+def get_team_data_outputs():
     return ui.panel_main(
-        ui.h2("Main Panel with Continuous and Reactive Output"),
+        ui.h2("Main Panel with Reactive Output"),
         ui.tags.hr(),
         ui.tags.section(
-            ui.h3("Continuous Updates (Weather API)"),
+            ui.h3('MLB Stats Dashboard'),
             ui.tags.br(),
-            ui.output_text("mtcars_location_string"),
+            ui.output_text('team_select_string'),
             ui.tags.br(),
-            ui.output_ui("mtcars_location_table"),
+            ui.output_table('team_data_table'),
             ui.tags.br(),
-            output_widget("mtcars_location_chart"),
+            ui.h3('Filtered Summary Table'),
+            output_widget('team_data_chart'),
             ui.tags.br(),
-            ui.tags.hr(),
-            ui.h3("Continuous Updates (Stock API)"),
+            output_widget('total_team_count'),
             ui.tags.br(),
-            ui.output_text("mtcars_stocks_string"),
+            output_widget('avg_wins_losses'),
             ui.tags.br(),
-            ui.output_text("mtcars_stocks_high"),
+            output_widget('team_win_loss_scatter'),
             ui.tags.br(),
-            ui.output_ui("mtcars_stocks_table"),
+            output_widget('wins_percentage_by_team'),
             ui.tags.br(),
-            output_widget("mtcars_stock_chart"),
-            ui.tags.br(),
-            ui.tags.hr(),
-            ui.h3("Filtered Cars: Charts"),
-            output_widget("mtcars_output_widget1"),
-            ui.output_plot("mtcars_plot1"),
-            ui.output_plot("mtcars_plot2"),
-            ui.tags.hr(),
-            ui.h3("Filtered MT Cars Table"),
-            ui.output_text("mtcars_record_count_string"),
-            ui.output_table("mtcars_filtered_table"),
-            ui.tags.hr(),
         ),
     )

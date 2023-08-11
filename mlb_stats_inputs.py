@@ -20,16 +20,8 @@ def get_team_data_inputs():
         ui.input_select(
             id="TEAM_SELECT",
             label="Choose a team",
-            choices=["Arizona Diamondbacks", "Atlanta Braves", "Baltimore Orioles", "Boston Red Sox", "Chicago Cubs", "Chicago White Sox", "Cincinnati Reds", "Cleveland Indians", "Colorado Rockies", "Detroit Tigers", "Houston Astros", "Kansas City Royals", "Los Angeles Angels", "Los Angeles Dodgers", "Miami Marlins", "Milwaukee Brewers", "Minnesota Twins", "New York Mets", "New York Yankees", "Oakland Athletics", "Philadelphia Phillies", "Pittsburgh Pirates", "San Diego Padres", "San Francisco Giants", "Seattle Mariners", "St. Louis Cardinals", "Tampa Bay Rays", "Texas Rangers", "Toronto Blue Jays", "Washington Nationals"],
-            selected="Kansas City Royals",        
-        ),
-        ui.tags.hr(),
-        ui.input_slider(
-            id="YEAR_SLIDER",
-            label="Choose a year",
-            min=1876,
-            max=2023,
-            value=[1876, 2023],
+            choices=["All Teams", "Arizona Diamondbacks", "Atlanta Braves", "Baltimore Orioles", "Boston Red Sox", "Chicago Cubs", "Chicago White Sox", "Cincinnati Reds", "Cleveland Indians", "Colorado Rockies", "Detroit Tigers", "Houston Astros", "Kansas City Royals", "Los Angeles Angels", "Los Angeles Dodgers", "Miami Marlins", "Milwaukee Brewers", "Minnesota Twins", "New York Mets", "New York Yankees", "Oakland Athletics", "Philadelphia Phillies", "Pittsburgh Pirates", "San Diego Padres", "San Francisco Giants", "Seattle Mariners", "St. Louis Cardinals", "Tampa Bay Rays", "Texas Rangers", "Toronto Blue Jays", "Washington Nationals"],
+            selected="Kansas City Royals",
         ),         
         ui.tags.hr(),    
         ui.tags.section(
@@ -56,7 +48,6 @@ def get_team_data_inputs():
                 ui.tags.li("BA: Batting Average"),
                 ui.tags.li("RA: Runs Allowed"),
                 ui.tags.li("ERA: Earned Run Average"),
-                
         
             ),
             ui.output_table("team_table"),

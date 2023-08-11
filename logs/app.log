@@ -1,10 +1,9 @@
-2023-08-08 13:43:58,283.app.INFO =============================================================
-2023-08-08 13:43:58,283.app.INFO Today is 2023-08-08 at 01:43 PM
-2023-08-08 13:43:58,284.app.INFO This file is running on: nt Windows 10
-2023-08-08 13:43:58,284.app.INFO The Python version is: 3.11.1
-2023-08-08 13:43:58,284.app.INFO The active environment path is:   C:\Users\jorda\OneDrive\Desktop\Northwest Homework\1. Continuous Intellgience\Module 7\cintel-live-updates-final\.venv
-2023-08-08 13:43:58,284.app.INFO The current working directory is: C:\Users\jorda\OneDrive\Desktop\Northwest Homework\1. Continuous Intellgience\Module 7\cintel-live-updates-final
-2023-08-08 13:43:58,284.app.INFO =============================================================
-2023-08-08 13:44:00,336.app.INFO Starting server ...
-2023-08-08 13:44:00,337.app.INFO Starting continuous updates ...
-2023-08-08 13:44:04,065.app.INFO Calling continuous updates ...
+2023-08-10 22:38:21,635.app.INFO =============================================================
+2023-08-10 22:38:21,635.app.INFO Today is 2023-08-10 at 10:38 PM
+2023-08-10 22:38:21,635.app.INFO This file is running on: nt Windows 10
+2023-08-10 22:38:21,635.app.INFO The Python version is: 3.11.1
+2023-08-10 22:38:21,635.app.INFO The active environment path is:   C:\Users\jorda\OneDrive\Desktop\Northwest Homework\1. Continuous Intellgience\Module 7\cintel-final\.venv
+2023-08-10 22:38:21,636.app.INFO The current working directory is: C:\Users\jorda\OneDrive\Desktop\Northwest Homework\1. Continuous Intellgience\Module 7\cintel-final
+2023-08-10 22:38:21,636.app.INFO =============================================================
+2023-08-10 22:38:23,035.app.INFO Starting server ...
+2023-08-10 22:38:24,386.app.INFO Calling continuous updates ...
